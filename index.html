@@ -26,31 +26,6 @@
     color: var(--white);
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* CUSTOM CURSOR */
-  .cursor {
-    position: fixed;
-    width: 12px; height: 12px;
-    background: var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s ease;
-    mix-blend-mode: difference;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px; height: 36px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.25s ease;
-    opacity: 0.5;
   }
 
   /* CANVAS */
@@ -995,9 +970,6 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
 <canvas id="bg-canvas"></canvas>
 
 <!-- NAV -->
@@ -1462,39 +1434,6 @@ if (taglineEl) {
   setTimeout(typeCycle, 1300);
 }
 
-
-// ===================== CUSTOM CURSOR =====================
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let rx = 0, ry = 0, cx = 0, cy = 0;
-
-document.addEventListener('mousemove', e => {
-  cx = e.clientX; cy = e.clientY;
-  cur.style.left = cx + 'px';
-  cur.style.top = cy + 'px';
-});
-
-function animRing() {
-  rx += (cx - rx) * 0.12;
-  ry += (cy - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(animRing);
-}
-animRing();
-
-document.querySelectorAll('a, button, .skill-card, .project-card, .service-card, .biz-card').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cur.style.transform = 'translate(-50%, -50%) scale(2)';
-    ring.style.transform = 'translate(-50%, -50%) scale(1.5)';
-    ring.style.opacity = '1';
-  });
-  el.addEventListener('mouseleave', () => {
-    cur.style.transform = 'translate(-50%, -50%) scale(1)';
-    ring.style.transform = 'translate(-50%, -50%) scale(1)';
-    ring.style.opacity = '0.5';
-  });
-});
 
 // ===================== 3D TILT CARD =====================
 const tiltCard = document.getElementById('tiltCard');
